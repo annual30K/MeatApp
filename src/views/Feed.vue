@@ -76,12 +76,12 @@ const fetchData = async (isRefresh = false) => {
             id,
             type: isVideo ? 'video' : 'image',
             src: isVideo
-              ? 'https://www.w3schools.com/html/mov_bbb.mp4'
-              : `https://picsum.photos/300/${Math.floor(Math.random() * 200 + 100)}?random=${id}`,
+              ? '/videos/1.mp4' // 本地视频
+              : '/image/2.jpg', // 本地图片
             thumbnail: isVideo
-              ? `https://picsum.photos/300/200?random=${id}`
+              ? '/image/1.jpg' // 本地缩略图
               : undefined,
-            content: generateRandomContent() // 使用随机生成的文字内容
+            content: generateRandomContent() || 'Default content'
           }
         })
         resolve(newItems)
