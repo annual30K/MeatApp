@@ -60,7 +60,10 @@
       />
       <div class="close-icon">
         <svg viewBox="0 0 24 24" class="close-icon-svg">
-          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="white" />
+          <path
+            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+            fill="white"
+          />
         </svg>
       </div>
     </div>
@@ -73,8 +76,8 @@ import { ref, onMounted, nextTick } from 'vue'
 const props = defineProps({
   item: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const isMediaLoaded = ref(false) // 标记媒体（图片/视频）是否加载完成
@@ -91,23 +94,23 @@ const onMediaLoad = () => {
 
 // 媒体加载失败
 const onMediaError = () => {
-  console.warn('Media failed to load:', props.item.src)
+  console.warn('媒体加载失败:', props.item.src)
   isMediaLoaded.value = true // 加载失败时也显示内容，避免卡在骨架屏
 }
 
 // 遮罩层视频加载完成
 const onOverlayVideoLoaded = () => {
-  console.log('Overlay video loaded metadata:', props.item.src)
+  console.log('遮罩层视频加载完成:', props.item.src)
   if (overlayVideo.value) {
-    overlayVideo.value.play().catch(error => {
-      console.error('Overlay video play failed:', error)
+    overlayVideo.value.play().catch((error) => {
+      console.error('遮罩层视频加载失败:', error)
     })
   }
 }
 
 // 遮罩层视频加载失败
 const onOverlayVideoError = () => {
-  console.error('Overlay video failed to load:', props.item.src)
+  console.error('遮罩层视频加载失败:', props.item.src)
 }
 
 // 超时机制，防止加载时间过长
@@ -115,13 +118,13 @@ onMounted(() => {
   // 检查 item.src 是否存在
   if (!props.item.src) {
     console.warn('Media src is not provided:', props.item)
-    isMediaLoaded.value = true // 如果 src 为空，直接显示（可能显示破图）
+    isMediaLoaded.value = true // 如果 src 为空，直接显示内容
     return
   }
 
   setTimeout(() => {
     if (!isMediaLoaded.value) {
-      console.warn('Media load timeout:', props.item.src)
+      console.warn('媒体加载超时:', props.item.src)
       isMediaLoaded.value = true // 3秒后强制显示内容
     }
   }, 3000)
@@ -133,8 +136,8 @@ const playVideo = async () => {
     isPlaying.value = true // 显示遮罩层
     await nextTick() // 等待 DOM 更新
     if (overlayVideo.value) {
-      overlayVideo.value.play().catch(error => {
-        console.error('Overlay video play failed:', error)
+      overlayVideo.value.play().catch((error) => {
+        console.error('视频加载失败:', error)
       })
     }
   }

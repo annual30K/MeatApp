@@ -12,10 +12,6 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@better-scroll/core": "^2.5.1",
-    "@better-scroll/pull-down": "^2.5.1",
-    "@better-scroll/pull-up": "^2.5.1",
-    "scroll-view": "^0.1.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
